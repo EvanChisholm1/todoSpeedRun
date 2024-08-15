@@ -9,7 +9,12 @@ const todosElement: HTMLUListElement = document.querySelector(".todos")!;
 const todoForm: HTMLFormElement = document.querySelector(".add")!;
 const newTodo: HTMLInputElement = document.querySelector("#new-todo")!;
 
-let todos: Todo[] = [];
+const cachedTodoString = localStorage.getItem("todos");
+console.log(cachedTodoString);
+
+let todos: Todo[] = cachedTodoString ? JSON.parse(cachedTodoString) : [];
+
+render();
 
 function generateNewTodoNodes() {
     function generateNode(t: Todo, i: number) {
@@ -44,10 +49,12 @@ function generateNewTodoNodes() {
                 todoText.classList.remove("complete");
                 checkbox.checked = false;
             }
+            saveTodos();
         });
 
         deleteButton.addEventListener("click", () => {
             todos = todos.filter((_, x) => x !== i);
+            saveTodos();
             render();
         });
 
@@ -75,7 +82,13 @@ function addTodo(todo: string) {
         todo,
     });
 
+    saveTodos();
+
     render();
+}
+
+function saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 todoForm.addEventListener("submit", (e) => {
