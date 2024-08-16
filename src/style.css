@@ -52,7 +52,7 @@ h6 {
 .todo {
     display: flex;
     gap: 30px;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .todo:hover {
@@ -69,4 +69,8 @@ h6 {
 
 body {
     background-color: pink;
+}
+
+button {
+    background-color: palevioletred;
 }
