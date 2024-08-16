@@ -39,7 +39,7 @@ function generateNewTodoNodes() {
             checkbox.checked = false;
         }
 
-        listItem.addEventListener("click", (e) => {
+        listItem.addEventListener("click", () => {
             todos[i].complete = !todos[i].complete;
 
             if (t.complete) {
